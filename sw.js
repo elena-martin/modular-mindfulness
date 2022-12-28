@@ -41,6 +41,26 @@ function urlB64ToUint8Array(base64String) {
   }
   return outputArray;
 }
+function pushNotif(){
+  self.addEventListener('push', (event) => {
+  
+    const data = event.data?.json() ?? {};
+    const title = data.title || "Something Has Happened";
+    const message = data.message || "Here's something you might want to check out.";
+    const icon = "images/new-notification.png";
+  
+    const notification = new self.Notification(title, {
+      body: message,
+      tag: 'simple-push-demo-notification',
+      icon,
+    });
+  
+    notification.addEventListener('click', () => {
+      clients.openWindow('https://example.blog.com/2015/03/04/something-new.html');
+    });
+  });
+}
+
 
 self.addEventListener('push', function(event) {
   console.log('[Service Worker] Push Received.');
