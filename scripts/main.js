@@ -163,5 +163,24 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 }
 
 function showNotif(){
-  showNotification(title, options)
+  const options = {
+    body: 'You have a notification!',
+    icon: 'https://cdn.icon-icons.com/icons2/2620/PNG/512/among_us_player_red_icon_156942.png',
+    badge: 'https://cdn.icon-icons.com/icons2/2620/PNG/512/among_us_player_red_icon_156942.png',
+    actions: [
+      {
+        action: 'view-action',
+        title: 'View',
+        type: 'button'
+      },
+      {
+        action: 'ignore-action',
+        title: 'Ignore',
+        type: 'button'
+      }
+    ],
+  };
+  const pushNotif = new PushEvent('push', options);
+
+  pushNotif.data.text();
 }
