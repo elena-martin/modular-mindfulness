@@ -161,3 +161,14 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.warn('Push messaging is not supported');
   pushButton.textContent = 'Push Not Supported';
 }
+
+
+const webpush = require("web-push");
+// VAPID keys should only be generated only once.
+// const vapidKeys = webpush.generateVAPIDKeys();
+const vapidKeys = {
+  privateKey: "bdSiNzUhUP6piAxLH-tW88zfBlWWveIx0dAsDO66aVU",
+  publicKey: "BIN2Jc5Vmkmy-S3AUrcMlpKxJpLeVRAfu9WBqUbJ70SJOCWGCGXKY-Xzyh7HDr6KbRDGYHjqZ06OcS3BjD7uAm8"
+};
+webpush.setVapidDetails("example@yourdomain.org", vapidKeys.publicKey, vapidKeys.privateKey);
+webpush.sendNotification(pushSubscription, "The text of the notification")
